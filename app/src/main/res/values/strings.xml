@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CulturNews</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_contact">Contacto</string>
+    <string name="action_feedback">Sugerencias</string>
+    <string name="open_dscrp">Open</string>
+    <string name="close_dscrp">Open</string>
+    <string name="title_activity_detail_event">Evento</string>
+    <string name="title_activity_detail_new">detail_new</string>
+    <string name="title_activity_detail_place">Detail_place</string>
+    <string name="title_activity_image_view">ImageViewActivity</string>
+
+    <string name="title_activity_radio_man">RadioMan</string>
+</resources>

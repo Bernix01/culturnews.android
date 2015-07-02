@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:background="#ff272726"
+    android:paddingTop="?attr/actionBarSize">
+
+
+    <com.malinskiy.superrecyclerview.SuperRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/listv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/filters"
+        app:layout_empty="@layout/empty_layout"
+        app:layout_moreProgress="@layout/progress_view"
+        app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
+        app:recyclerClipToPadding="false"
+        app:recyclerPadding="0dp"
+        app:scrollbarStyle="insideOverlay" />
+
+    <LinearLayout
+        android:id="@+id/filters"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:divider="@drawable/divider"
+        android:dividerPadding="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <ImageView
+            android:id="@+id/etypeall"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:padding="3dp"
+            android:src="@drawable/nn005" />
+
+        <ImageView
+            android:id="@+id/etype1"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/n004" />
+
+        <ImageView
+            android:id="@+id/etype2"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/n001" />
+
+        <ImageView
+            android:id="@+id/etype3"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/ncontem" />
+
+        <ImageView
+            android:id="@+id/etype4"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/n006" />
+
+        <ImageView
+            android:id="@+id/etype5"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/n003" />
+
+        <ImageView
+            android:id="@+id/etype6"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:background="#5b5b5b"
+            android:padding="3dp"
+            android:src="@drawable/n002" />
+    </LinearLayout>
+
+</RelativeLayout>

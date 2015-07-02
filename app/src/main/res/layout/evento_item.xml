@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/event_container"
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:background="#9a9a9a"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <ImageView
+        android:id="@+id/himgv_evento_item"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/event_txtv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/himgv_evento_item"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/event_detail_txtv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/event_txtv"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/etype_imgv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="2dp"
+        android:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>
