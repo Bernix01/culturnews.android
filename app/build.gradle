@@ -8,8 +8,8 @@ android {
         applicationId "culturnews.culturnews"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -37,6 +37,4 @@ dependencies {
     compile('com.github.florent37:materialviewpager:1.0.3.3@aar') {
         transitive = true
     }
-    compile files('src/main/libs/notification-hubs-0.4.jar')
-    compile files('src/main/libs/notifications-1.0.1.jar')
 }

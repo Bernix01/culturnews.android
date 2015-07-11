@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -26,10 +25,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.location.LocationServices;
-import com.microsoft.windowsazure.messaging.NotificationHub;
-import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,6 @@ import java.util.List;
 import culturnews.culturnews.fragments.MainFragment;
 import culturnews.culturnews.fragments.NewsFragment;
 import culturnews.culturnews.fragments.PlacesFragment;
-import culturnews.culturnews.util.MyHandler;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import yalantis.com.sidemenu.interfaces.Resourceble;
@@ -50,14 +45,11 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
     GoogleApiClient mGoogleApiClient;
     private DrawerLayout drawerLayout;
     private List<SlideMenuItem> list = new ArrayList<>();
-    private MainFragment mainFragment;
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
     private String loc;
 
     private String SENDER_ID = "721300573378";
-    private GoogleCloudMessaging gcm;
-    private NotificationHub hub;
     private String HubName = "gbm";
     private String HubListenConnectionString = "Endpoint=sb://gbmnotify.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Mug+gFESrGGXaYsXHsuJjb91rkn+yvR4FuoyhC1hJpM=";
     @Override
@@ -71,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
             view2.setPadding(0, getStatusBarHeight(), 0, 0);
         }
         buildGoogleApiClient();
-        mainFragment = MainFragment.newInstance();
+        MainFragment mainFragment = MainFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mainFragment)
                 .commit();
@@ -87,11 +79,6 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
         setactionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, mainFragment, drawerLayout, this);
-        MyHandler.mainActivity = this;
-        NotificationsManager.handleNotifications(this, SENDER_ID, MyHandler.class);
-        gcm = GoogleCloudMessaging.getInstance(this);
-        hub = new NotificationHub(HubName, HubListenConnectionString, this);
-        registerWithNotificationHubs();
     }
 
     public int getStatusBarHeight() {
@@ -110,23 +97,6 @@ public class MainActivity extends ActionBarActivity implements ViewAnimator.View
             return resources.getDimensionPixelSize(resourceId);
         }
         return 0;
-    }
-    @SuppressWarnings("unchecked")
-    private void registerWithNotificationHubs() {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object... params) {
-                try {
-                    String regid = gcm.register(SENDER_ID);
-                    hub.register(regid);
-
-                } catch (Exception e) {
-                    Log.e("Exception", "" + e.getMessage());
-                    return e;
-                }
-                return null;
-            }
-        }.execute(null, null, null);
     }
 
     public void setActionBarTitle(String title) {
