@@ -57,7 +57,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
     private int[] act_types = new int[6];
     private int explorer;
     private Boolean isFull = true;
-
+    private int c;
     public static MainFragment newInstance() {
         MainFragment contentFragment = new MainFragment();
         Bundle bundle = new Bundle();
@@ -100,7 +100,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
             (root.getChildAt(i)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int c = a;
+                    c = a;
                     c--;
                     changeBackground(c++, root);
                     ((MainActivity) getActivity()).setActionBarTitle("Eventos " + RestApiInterface.getHumanCategory(c));
@@ -223,10 +223,14 @@ public class MainFragment extends Fragment implements ScreenShotable {
         RestApiInterface.CancelR(getActivity().getApplicationContext(), true);
     }
 
+    public int getCatID(int c){
+        return 41+c;
+    }
+
     public void getMoreEvents() throws JSONException {
         RequestParams params = new RequestParams();
         params.put("api_key", RestApiInterface.getKey());
-        params.put("catid", RestApiInterface.events);
+        params.put("catid", (c==-1)? RestApiInterface.events : getCatID(c));
         params.put("limit", RestApiInterface.stdLimit);
         params.put("orderby", "created");
         params.put("maxsubs", 5);
@@ -283,7 +287,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
     public void getNewEvents(final int offset) throws JSONException {
         RequestParams params = new RequestParams();
         params.put("api_key", RestApiInterface.getKey());
-        params.put("catid", RestApiInterface.events);
+        params.put("catid", (c==-1)? RestApiInterface.events : getCatID(c));
         params.put("limit", RestApiInterface.stdLimit);
         params.put("maxsubs", 5);
         params.put("offset", offset);
