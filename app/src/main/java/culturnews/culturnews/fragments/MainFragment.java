@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -106,6 +105,8 @@ public class MainFragment extends Fragment implements ScreenShotable {
                     ((MainActivity) getActivity()).setActionBarTitle("Eventos " + RestApiInterface.getHumanCategory(c));
                     c--;
                     filter(c);
+
+                    //adapt.reorder();
                 }
             });
         }
@@ -318,7 +319,6 @@ public class MainFragment extends Fragment implements ScreenShotable {
                         for (int i = 0; i < events.length(); i++) {
                             Boolean alreadyin = false;
                             JSONObject foo = events.getJSONObject(i);
-                            Log.e("ids", "last: " + adapt.getItemId(0) + " new first: " + foo.getInt("id"));
                             JSONObject metadata = foo.getJSONObject("metadata");
                             int id = foo.getInt("id");
                             JSONObject dats = new JSONObject(metadata.getString("xreference"));
@@ -416,19 +416,23 @@ public class MainFragment extends Fragment implements ScreenShotable {
             filter(type);
             return;
         }
+        Collections.sort(itemList);
+        adapt.notifyDataSetChanged();
+        adapt = new MrEventAdapter(itemList, getActivity().getApplicationContext());
+        eventsList.setAdapter(adapt);
         if (type != -1)
             isFull = false;
-        Handler handler = new Handler();
+      /* Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 adapt.reorder();
             }
-        }, 300);
+        }, 300);*/
         eventsList.showRecycler();
     }
 
     public void doTheThing(int pos) {
-        Log.e("deleted pos", "" + pos);
+        //  Log.e("deleted pos", "" + pos);
         garbageMan.add(adapt.get(pos));
         adapt.remove(pos);
     }

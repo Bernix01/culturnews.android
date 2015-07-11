@@ -73,6 +73,7 @@ public class MrNewsAdapter extends RecyclerView.Adapter<MrNewsAdapter.ViewHolder
 
     public void reorder() {
         Collections.sort(items);
+
         notifyDataSetChanged();
     }
 

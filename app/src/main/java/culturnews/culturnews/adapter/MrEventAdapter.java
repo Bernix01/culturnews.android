@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import culturnews.culturnews.Detail_event;
 import culturnews.culturnews.R;
@@ -139,7 +138,7 @@ public class MrEventAdapter extends RecyclerView.Adapter<MrEventAdapter.ViewHold
     }
 
     public void reorder() {
-        Collections.sort(items);
+        //Collections.sort(items);
         notifyDataSetChanged();
     }
 

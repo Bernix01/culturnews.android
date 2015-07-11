@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -46,6 +47,7 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
 public class NewsFragment extends Fragment implements ScreenShotable {
     int max_pages = 1;
     LinearLayout fcontainer;
+    int c;
     private MrNews bean;
     private ArrayList<MrNews> itemList;
     private ArrayList<MrNews> garbageMan = new ArrayList<MrNews>();
@@ -97,12 +99,13 @@ public class NewsFragment extends Fragment implements ScreenShotable {
             (root.getChildAt(i)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int c = a;
+                    c = a;
                     c--;
                     changeBackground(c++, root);
                     ((MainActivity) getActivity()).setActionBarTitle("Noticias " + RestApiInterface.getHumanCategory(c));
                     c--;
                     filter(c);
+                    adapt.reorder();
                 }
             });
         }
@@ -190,10 +193,13 @@ public class NewsFragment extends Fragment implements ScreenShotable {
         });
     }
 
+    public int getCatID(int c) {
+        return 31 + c;
+    }
     public void getMoreNews(final int nitems) throws JSONException {
         RequestParams params = new RequestParams();
         params.put("api_key", RestApiInterface.getKey());
-        params.put("catid", RestApiInterface.news);
+        params.put("catid", (c == -1) ? RestApiInterface.events : getCatID(c));
         params.put("limit", RestApiInterface.stdLimit);
         params.put("maxsubs", 5);
         params.put("offset", Math.round(nitems / RestApiInterface.stdLimit));
@@ -247,7 +253,7 @@ public class NewsFragment extends Fragment implements ScreenShotable {
     public void getNewNews(final int offset) throws JSONException {
         RequestParams params = new RequestParams();
         params.put("api_key", RestApiInterface.getKey());
-        params.put("catid", RestApiInterface.news);
+        params.put("catid", (c == -1) ? RestApiInterface.events : getCatID(c));
         params.put("limit", RestApiInterface.stdLimit);
         params.put("maxsubs", 5);
         params.put("offset", offset);
@@ -381,6 +387,10 @@ public class NewsFragment extends Fragment implements ScreenShotable {
             filter(type);
             return;
         }
+        Collections.sort(itemList);
+        adapt.notifyDataSetChanged();
+        adapt = new MrNewsAdapter(itemList, getActivity().getApplicationContext());
+        newsList.setAdapter(adapt);
         if (type != -1)
             isFull = false;
         Handler handler = new Handler();
@@ -388,7 +398,7 @@ public class NewsFragment extends Fragment implements ScreenShotable {
             public void run() {
                 adapt.reorder();
             }
-        }, 300);
+        }, 400);
         newsList.showRecycler();
     }
 

@@ -163,20 +163,11 @@ public class MrEvent implements Comparable {
     @Override
     public int compareTo(Object another) {
         MrEvent e = (MrEvent) another;
-        if (!e.isSpecial() && !isSpecial()) {
             if (dateStart.after(e.dateStart))
                 return 1;
             if (dateStart.before(e.dateStart))
                 return -1;
-        }
-        if (!e.isSpecial() && isSpecial()) {
-            if (getDayOfMonth(new Date()) < getDayOfMonth(getEndtDate()) && getDayOfMonth(new Date()) > getDayOfMonth(getStartDate())) {
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(getEndtDate());
-                cal.roll(Calendar.DAY_OF_MONTH, -(1));
-            }
 
-        }
         return 0;
     }
 

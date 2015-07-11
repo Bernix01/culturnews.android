@@ -36,15 +36,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA0pCuKpX8RCqyjUjkNbc1Q74Y4CGVrSwY" />
 
-        <receiver
-            android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="culturnews.culturnews" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".MainActivity"
